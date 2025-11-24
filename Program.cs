@@ -117,7 +117,7 @@ public class Program
 
         do
         {
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.Yellow;
 
             if (printName==false)
             {
