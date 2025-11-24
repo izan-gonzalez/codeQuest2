@@ -8,9 +8,7 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
-
-
-
+using static System.Net.Mime.MediaTypeNames;
 
 
 
@@ -65,26 +63,31 @@ public class Program
         //Level 4
         const string InventoryMassage = "In your inventory you have:";
         string[] arrayInventory = new string[0];
-        int maxItemps = 0;
         //Level 5
 
-
         //Level 6
-
-
-
-
+        const string AtacsLevel = "Your spells at lvl are: ";
+        string[] ArrayLevel1 = { "Magic Spark 💫" };
+        string[] ArrayLevel2 = { "Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️" };
+        string[] ArrayLevel3 = { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" };
+        string[] ArrayLevel4 = { "Wave of Light ⚜️", "Storm of Wings 🐦" };
+        string[] ArrayLevel5 = { "Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" };
         //Level 7
+        const string DecodingOperation = "Choose a decoding operation:";
+        const string DecodingOperation1 = "1. Decipher spell (remove spaces)";
+        const string DecodingOperation2 = "2. Count magical runes (vowels)";
+        const string DecodingOperation3 = "3. Extract secret code (numbers)";
+        const string DecodingNumber = "Put a number between 1 to 3 to decode:";
+
+        const string DecodingComplete = " the 3 decodes has been completed.";
+        string[] ArrayScroll = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
+        int chooseScroll = 0;
 
 
-
-
-
-
-        int WizardLvl = 0;
-
-
-
+        bool trueMeaning1 = false; 
+        bool trueMeaning2 = false;
+        bool trueMeaning3 = false;
+        int WizardLvl = 1;
 
 
 
@@ -94,20 +97,10 @@ public class Program
 
 
 
-
-
-
-
         string nameWizard;
 
 
-
-
         var random = new Random();
-
-
-
-
 
 
 
@@ -134,16 +127,6 @@ public class Program
 
 
 
-
-
-
-
-
-
-
-
-
-
             try
             {
                 oP = Convert.ToInt32(Console.ReadLine());
@@ -160,10 +143,6 @@ public class Program
 
 
 
-
-
-
-
             switch (oP)
             {
                 case 1:
@@ -172,18 +151,10 @@ public class Program
 
 
 
-
-
-
-
                     Console.Write(GuardAsk);
                     try
                     {
                         nameWizard = Console.ReadLine()!;
-
-
-
-
 
 
 
@@ -199,38 +170,24 @@ public class Program
                     }
 
 
-
-
                     nameWizard = Console.ReadLine()!;
-
-
 
 
                     string upperName = nameWizard.ToUpper();
 
 
-
-
                     string firtsLetter = upperName.Remove(1);
 
 
+                    string nameCreator = nameWizard.Substring(1);
 
 
-                    string nameCreato = nameWizard.Substring(1);
-
-
-
-
-                    string realName = firtsLetter.Insert(1, nameCreato);
-
-
-
+                    string realName = firtsLetter.Insert(1, nameCreator);
 
 
 
                     Console.WriteLine(GuardLore);
                     Console.WriteLine("Your mind: I will meditate for that time.");
-
 
                     for (int i = 1; i <= 5; i++)
                     {
@@ -238,23 +195,13 @@ public class Program
 
 
 
-
-
-
                         int trainingTime = random.Next(1, 25);
-
-
 
 
                         powerWizard = random.Next(1, 11);
 
 
-
-
                         totalWizard += powerWizard;
-
-
-
 
 
 
@@ -262,13 +209,9 @@ public class Program
 
 
 
-
-
-
                         if (totalWizard < 20)
                         {
                             Console.WriteLine(WizardTitle + WizardTitle1 + WizardText1);
-
 
                         }
                         else if (20 <= totalWizard && totalWizard <= 29)
@@ -291,28 +234,21 @@ public class Program
                     break;
 
 
-
-
                 case 2:
                     string[] ArrayMonster = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem 🤖", "Lost Necromancer 🧝‍♂️", "Ancient Dragon 🐉" };
                     int[] ArrayHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
 
 
-
-
                     int randomEnemy = random.Next(0, 8);
                     Console.WriteLine(EnemyEncounter + ArrayMonster[randomEnemy] + EnemyEncounterHp + ArrayHp[randomEnemy]);
 
-
                     int enemyHp = ArrayHp[randomEnemy];
-
 
 
                     int numberDice;
                     do
                     {
                         numberDice = random.Next(1, 7);
-
 
                         if (numberDice == 1)
                         {
@@ -350,7 +286,6 @@ public class Program
                     }
                     while (enemyHp > 0);
 
-
                     if (enemyHp <= 0)
                     {
                         WizardLvl += 1;
@@ -359,29 +294,22 @@ public class Program
                     break;
                 case 3:
 
-
                     int[,] matMine = new int[5, 5];
                     string[,] simbolMine = new string[5, 5];
 
-
                     int obtainCoin = random.Next(1, 101);
-
 
                     int coinValue = random.Next(5, 51);
 
 
-
-
                     for (int x = 0; x < 5; x++)
                     {
-
 
                         for (int y = 0; y < 5; y++)
                         {
                             simbolMine[x, y] = "➖";
                         }
                     }
-
 
                     for (int x = 0; x < 5; x++)
                     {
@@ -402,16 +330,13 @@ public class Program
                     }
                     int minerTrys = 1;
 
-
                     while (minerTrys <= 5)
                     {
                         Console.WriteLine(MineX);
                         int x = int.Parse(Console.ReadLine());
 
-
                         Console.WriteLine(MineY);
                         int y = int.Parse(Console.ReadLine());
-
 
                         if (matMine[x, y] == 0)
                         {
@@ -436,10 +361,7 @@ public class Program
                     }
                     break;
 
-
                 case 4:
-
-
 
 
                     Console.WriteLine(InventoryMassage);
@@ -448,40 +370,31 @@ public class Program
                         Console.WriteLine($"{arrayInventory[i]}");
                     }
 
-
                     break;
                 case 5:
                     string[] AddToInventory(string[] inventory, string item)
                     {
-                        // Crear nuevo array 1 espacio más grande
+
                         string[] newInventory = new string[arrayInventory.Length + 1];
 
-
-                        // Copiar todo lo anterior
+ 
                         for (int i = 0; i < inventory.Length; i++)
                         {
                             newInventory[i] = inventory[i];
                         }
 
-
-                        // Añadir el nuevo objeto
                         newInventory[newInventory.Length - 1] = item;
-
 
                         return newInventory;
                     }
 
-
                     string[] ArrayShop = { "Iron Dagger 🗡️", "Healing Potion ⚗️", "Ancient Key 🗝️", "Crossbow 🏹", "Metal Shield 🛡️" };
 
-
                     int[] ArrayPrice = { 30, 10, 50, 40, 20 };
-
 
                     int userBuy = 0;
                     for (int i = 0; i < ArrayShop.Length; i++)
                     {
-
 
                         Console.Write($"{i}-{ArrayShop[i]}");
                         Console.WriteLine($" The price are {ArrayPrice[i]}");
@@ -496,12 +409,9 @@ public class Program
                         Console.WriteLine();
                     }
 
-
                     if (userBuy >= 0 && userBuy <= 4)
                     {
                         int objectPrice = ArrayPrice[userBuy];
-
-
 
 
                         if (totalBitcoins >= objectPrice)
@@ -520,27 +430,134 @@ public class Program
                     }
 
 
-
-
                     break;
                 case 6:
 
-
-
-
-
+                    if (WizardLvl == 1)
+                        for (int i = 0; i < ArrayLevel1.Length; i++)
+                        {
+                            Console.WriteLine(ArrayLevel1[i]);
+                        }
+                    else if (WizardLvl == 2)
+                    {
+                        for (int i = 0; i < ArrayLevel2.Length; i++)
+                        {
+                            Console.WriteLine(ArrayLevel2[i]);
+                        }
+                    }
+                    else if (WizardLvl == 3)
+                    {
+                        for (int i = 0; i < ArrayLevel3.Length; i++)
+                        {
+                            Console.WriteLine(ArrayLevel3[i]);
+                        }
+                    }
+                    else if (WizardLvl == 4)
+                    {
+                        for (int i = 0; i < ArrayLevel4.Length; i++)
+                        {
+                            Console.WriteLine(ArrayLevel4[i]);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your spells at lvl are:");
+                        for (int i = 0; i < ArrayLevel5.Length; i++)
+                        {
+                            Console.WriteLine(ArrayLevel5[i]);
+                        }
+                    }
 
                     break;
                 case 7:
 
+                 string decodeScroll, trueMeaning;
+                    for (int i = 0; i < ArrayScroll.Length; i++)
+                    {
+                        Console.WriteLine($"{i + 1}. {ArrayScroll[i]}");
+                    }
+                    Console.WriteLine(DecodingOperation);
+                    Console.WriteLine(DecodingOperation1);
+                    Console.WriteLine(DecodingOperation2);
+                    Console.WriteLine(DecodingOperation3);
+                    Console.WriteLine(DecodingNumber);
+                    try
+                    {
+                       chooseScroll = int.Parse(Console.ReadLine()!);
+                    }
+                    catch(Exception)
+                    {
+                        Console.WriteLine();
+                    }
 
 
+                    
+                    if (chooseScroll == 1)
+                    { 
+
+                        decodeScroll = ArrayScroll[0];
+
+                        trueMeaning = decodeScroll.Replace(" ","");
+
+                        Console.WriteLine(trueMeaning);
+
+                        trueMeaning1 = true;
+                        if((trueMeaning1 && trueMeaning2 && trueMeaning3)==true)
+                        {
+                            Console.WriteLine(DecodingComplete);
+                        }
+                    }
+                    else if (chooseScroll == 2)
+                    {
+                        string scrollVowels = "aeiou";
+                        string scrollString = ArrayScroll[1].ToLower();
+                        int  totalVowls=0;
+                        for(int i=0; i< ArrayScroll[1].Length; i++)
+                        {
+                            string scrollLetter = scrollString.Substring(i, 1);
+                            if (scrollVowels.Contains(scrollLetter))
+                            {
+                                totalVowls++;
+                            }
+                        }
+                        Console.WriteLine(totalVowls);
+                        trueMeaning2 = true;
+                        if ((trueMeaning1 && trueMeaning2 && trueMeaning3) == true)
+                        {
+                            Console.WriteLine(DecodingComplete);
+                        }
+                    }
+                    else if (chooseScroll == 3)
+                    {
+                        decodeScroll = ArrayScroll[2];
+                        string scrollNumber = ""; 
 
 
+                        for (int i = 0; i < decodeScroll.Length; i++)
+                        {
+                            string numberStrings = decodeScroll.Substring(i, 1); 
 
 
+                            if ("1234567890".Contains(numberStrings))
+                            {
+                                scrollNumber += numberStrings; 
+                            }
+                        }
 
-                    break;
+                        Console.WriteLine("🔮 Decoded number: " + scrollNumber);
+
+                        trueMeaning3 = true;
+                        if ((trueMeaning1 && trueMeaning2 && trueMeaning3) == true)
+                        {
+                            Console.WriteLine(DecodingComplete);
+                        }
+                    }
+                    else
+                    {
+
+                    }
+
+                        break;
                 default:
                     Console.WriteLine(Error);
                     break;
