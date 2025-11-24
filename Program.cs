@@ -30,6 +30,7 @@ public class Program
         const string InputErrorMessage = "Invalid input. Please enter a number between 1 and 8.";
         const string SpaceBar = "================================================";
         const string Error = "Input error put a number between 1 to 8";
+        int oP = 0;
         bool printName=false;
         // Level 1 train
         const string GuardAsk = "Guard: Whats your name Wizard?";
@@ -47,7 +48,7 @@ public class Program
         const string WizardText3 = ", You are a Summoner of Magic Breezes.";
         const string WizardText4 = ", Wow! You can summon dragons without burning down the lab!";
         const string WizardText5 = ", You have reached the rank of Master of Arcana!.";
-        string nameWizard, upperName, firtsLetter, nameCreator, wizardMenuTitle = "", realName="";
+        string realName, upperName, firtsLetter, nameCreator, wizardMenuTitle = "", nameWizard="";
         int totalWizard=0, powerWizard = 0;
 
         // Level 2 increase lvl
@@ -99,14 +100,15 @@ public class Program
         const string scrollVowels = "aeiou";
         const string TextNumber = "🔮 Decoded number: ";
         const string NumberString = "1234567890";
+        const string DecodingError = "Wrong number, must be between 1 and 3";
         string[] ArrayScroll = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
         int chooseScroll = 0;
         bool trueMeaning1 = false;
         bool trueMeaning2 = false;
         bool trueMeaning3 = false;
-        // else
-        string menuSubtitle = $"===== Welcome,{realName} the {wizardMenuTitle} with level {WizardLvl} =====";
-        int oP = 0; 
+        // menu2
+        string menuSubtitle = $"===== Welcome, {nameWizard} the {wizardMenuTitle} with level {WizardLvl} =====";
+
 
 
 
@@ -170,7 +172,7 @@ public class Program
             switch (oP)
             {
                 case 1:
-
+                    
                     Console.WriteLine(GuardAsk);
                     try
                     {
@@ -200,8 +202,6 @@ public class Program
                         Console.WriteLine(GuardRage);
                         break;  
                     }
-
-
 
 
 
@@ -257,8 +257,6 @@ public class Program
                         printName = true;
                     }
                     break;
-
-
                 case 2:
 
                     int randomEnemy = random.Next(0, 8);
@@ -319,6 +317,8 @@ public class Program
                 case 3:
 
                     int[,] matMine = new int[5, 5];
+
+
                     string[,] simbolMine = new string[5, 5];
 
                     int obtainCoin = random.Next(1, 101);
@@ -382,8 +382,11 @@ public class Program
                         else
                         {
                             simbolMine[mineLine, mineColumn] = YesBits;
+
                             totalBitcoins += matMine[mineLine, mineColumn];
+
                             Console.WriteLine("You obtained " + matMine[mineLine, mineColumn] + "Bitcoins");
+
                             matMine[mineLine, mineColumn] -= matMine[mineLine, mineColumn];
                         }
                         minerTrys++;
@@ -545,17 +548,23 @@ public class Program
                     else if (chooseScroll == 2)
                     {
                         string scrollString = ArrayScroll[1].ToLower();
+
                         int  totalVowls=0;
+
                         for(int i=0; i< ArrayScroll[1].Length; i++)
                         {
                             string scrollLetter = scrollString.Substring(i, 1);
+
                             if (scrollVowels.Contains(scrollLetter))
                             {
                                 totalVowls++;
                             }
                         }
+
                         Console.WriteLine(totalVowls);
+
                         trueMeaning2 = true;
+
                         if ((trueMeaning1 && trueMeaning2 && trueMeaning3) == true)
                         {
                             Console.WriteLine(DecodingComplete);
@@ -564,8 +573,8 @@ public class Program
                     else if (chooseScroll == 3)
                     {
                         decodeScroll = ArrayScroll[2];
-                        string scrollNumber = ""; 
 
+                        string scrollNumber = ""; 
 
                         for (int i = 0; i < decodeScroll.Length; i++)
                         {
@@ -581,6 +590,7 @@ public class Program
                         Console.WriteLine(TextNumber + scrollNumber);
 
                         trueMeaning3 = true;
+
                         if ((trueMeaning1 && trueMeaning2 && trueMeaning3) == true)
                         {
                             Console.WriteLine(DecodingComplete);
@@ -588,12 +598,14 @@ public class Program
                     }
                     else
                     {
-
+                        Console.WriteLine(DecodingError);
                     }
 
                         break;
                 default:
+
                     Console.WriteLine(Error);
+
                     break;
             }
         } while (oP != 8);
