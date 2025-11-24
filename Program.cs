@@ -31,10 +31,11 @@ public class Program
         const string SpaceBar = "================================================";
         const string Error = "Input error put a number between 1 to 8";
         bool printName=false;
-        // Level 1
+        // Level 1 train
         const string GuardAsk = "Guard: Whats your name Wizard?";
         const string GuardRage = "Guard: THAT NAME IS NOT ON THE LIST!, TELL ME YOUR REAL NAME!!";
         const string GuardLore = "Guard: Ho you are the wizard ho robbed one apple, you will be here for other 5 days";
+        const string AutoSpeak = ": Its time to meditate";
         const string WizardTitle = "Title: ";
         const string WizardTitle1 = "Raoden the Elantrian";
         const string WizardTitle2 = "Zyn the Buguejat";
@@ -49,7 +50,9 @@ public class Program
         string nameWizard, upperName, firtsLetter, nameCreator, wizardMenuTitle = "", realName="";
         int totalWizard=0, powerWizard = 0;
 
-        // Level 2
+        // Level 2 increase lvl
+        string[] ArrayMonster = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem 🤖", "Lost Necromancer 🧝‍♂️", "Ancient Dragon 🐉" };
+        int[] ArrayHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
         const string DiceOne = "  ________ \n /       /|\n/_______/ |\n|       | |\n|   o   | /\n|       |/\n'-------' ";
         const string DiceTwo = "  ________ \n /       /|\n/_______/ |\n|o      | |\n|       | /\n|     o |/\n'-------' ";
         const string DiceTree = "  ________ \n /       /|\n/_______/ |\n|o      | |\n|   o   | /\n|     o |/\n'-------' ";
@@ -61,44 +64,48 @@ public class Program
         const string ActionAttack = "Click a key to hit";
         const string TotalHp = "total hp are: ";
         const string LvlUp = " level up to: ";
-        // Level 3 
-        const string MineX = "Put a number between 0 to 4 to chose line to mine";
-        const string MineY = "Put a number between 0 to 4 to chose column to mine";
+        // Level 3 mine
+        const string MineX = "Put a number between 0 to 4 to chose line to mine: ";
+        const string MineY = "Put a number between 0 to 4 to chose column to mine: ";
         const string MineError = "wrong number";
         const string NoBits = "❌";
         const string YesBits = "🪙";
+        const string TellNumberOfBits = "Your total bitcoins are ";
         int mineLine=0, mineColumn=0;
         int totalBitcoins = 0;
         
-        //Level 4
+        //Level 4 inventory
         const string InventoryMassage = "In your inventory you have:";
         string[] arrayInventory = new string[0];
-        //Level 5
+        //Level 5 shop
+        const string HowBuyInShop = "Put a number between 0 to 4 to buy the object";
         string[] ArrayShop = { "Iron Dagger 🗡️", "Healing Potion ⚗️", "Ancient Key 🗝️", "Crossbow 🏹", "Metal Shield 🛡️" };
+        int[] ArrayPrice = { 30, 10, 50, 40, 20 };
         int WizardLvl = 1;
-        //Level 6
+        //Level 6 attacks
         const string AtacsLevel = " your spells  are: ";
         string[] ArrayLevel1 = { "Magic Spark 💫" };
         string[] ArrayLevel2 = { "Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️" };
         string[] ArrayLevel3 = { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" };
         string[] ArrayLevel4 = { "Wave of Light ⚜️", "Storm of Wings 🐦" };
         string[] ArrayLevel5 = { "Cataclysm 🌋", "Portal of Chaos 🌀", "Arcane Blood Pact 🩸", "Elemental Storm ⛈️" };
-        //Level 7
+        //Level 7 decoding
         const string DecodingOperation = "Choose a decoding operation:";
         const string DecodingOperation1 = "1. Decipher spell (remove spaces)";
         const string DecodingOperation2 = "2. Count magical runes (vowels)";
         const string DecodingOperation3 = "3. Extract secret code (numbers)";
         const string DecodingNumber = "Put a number between 1 to 3 to decode:";
-
         const string DecodingComplete = " the 3 decodes has been completed.";
+        const string scrollVowels = "aeiou";
+        const string TextNumber = "🔮 Decoded number: ";
+        const string NumberString = "1234567890";
         string[] ArrayScroll = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
         int chooseScroll = 0;
-
-        string menuSubtitle = $"===== Welcome,{realName} the {wizardMenuTitle} with level {WizardLvl} =====";
-        bool trueMeaning1 = false; 
+        bool trueMeaning1 = false;
         bool trueMeaning2 = false;
         bool trueMeaning3 = false;
-
+        // else
+        string menuSubtitle = $"===== Welcome,{realName} the {wizardMenuTitle} with level {WizardLvl} =====";
         int oP = 0; 
 
 
@@ -110,6 +117,8 @@ public class Program
 
         do
         {
+            Console.ForegroundColor = ConsoleColor.Red;
+
             if (printName==false)
             {
                 Console.WriteLine(MenuTitle);
@@ -162,8 +171,6 @@ public class Program
             {
                 case 1:
 
-                    nameWizard = "";
-
                     Console.WriteLine(GuardAsk);
                     try
                     {
@@ -183,13 +190,15 @@ public class Program
 
                         nameWizard = realName;
                     }
-                    catch (NullReferenceException)
+                    catch (FormatException)
                     {
                         Console.WriteLine(GuardRage);
+                        break;
                     }
                     catch (Exception)
                     {
                         Console.WriteLine(GuardRage);
+                        break;  
                     }
 
 
@@ -197,7 +206,7 @@ public class Program
 
 
                     Console.WriteLine(GuardLore);
-                    Console.WriteLine($"{nameWizard}: I will meditate for that time.");
+                    Console.WriteLine(nameWizard+ AutoSpeak);
 
                     for (int i = 1; i <= 5; i++)
                     {
@@ -251,9 +260,6 @@ public class Program
 
 
                 case 2:
-                    string[] ArrayMonster = { "Wandering Skeleton 💀", "Forest Goblin 👹", "Green Slime", "Ember Wolf 🐺", "Giant Spider 🕷️", "Iron Golem 🤖", "Lost Necromancer 🧝‍♂️", "Ancient Dragon 🐉" };
-                    int[] ArrayHp = { 3, 5, 10, 11, 18, 15, 20, 50 };
-
 
                     int randomEnemy = random.Next(0, 8);
                     Console.WriteLine(EnemyEncounter + ArrayMonster[randomEnemy] + EnemyEncounterHp + ArrayHp[randomEnemy]);
@@ -352,10 +358,10 @@ public class Program
                     {
                         try
                         {
-                            Console.WriteLine(MineX);
+                            Console.Write(MineX);
                              mineLine = int.Parse(Console.ReadLine()!);
 
-                            Console.WriteLine(MineY);
+                            Console.Write(MineY);
                              mineColumn = int.Parse(Console.ReadLine()!);
 
                         }
@@ -369,8 +375,6 @@ public class Program
                             Console.WriteLine(MineError);
                             continue;
                         }
- 
-
                         if (matMine[mineLine, mineColumn] == 0)
                         {
                             simbolMine[mineLine, mineColumn] = NoBits;
@@ -383,7 +387,7 @@ public class Program
                             matMine[mineLine, mineColumn] -= matMine[mineLine, mineColumn];
                         }
                         minerTrys++;
-                        Console.WriteLine("Your total bitcoins are" + totalBitcoins);
+                        Console.WriteLine(TellNumberOfBits + totalBitcoins);
                         for (int i = 0; i < 5; i++)
                         {
                             for (int j = 0; j < 5; j++)
@@ -423,9 +427,6 @@ public class Program
                         return newInventory;
                     }
 
-
-                    int[] ArrayPrice = { 30, 10, 50, 40, 20 };
-
                     int userBuy = 0;
                     for (int i = 0; i < ArrayShop.Length; i++)
                     {
@@ -433,7 +434,7 @@ public class Program
                         Console.Write($"{i}-{ArrayShop[i]}");
                         Console.WriteLine($" The price are {ArrayPrice[i]}");
                     }
-                    Console.WriteLine("Put a number between 0 to 4 to buy the object");
+                    Console.WriteLine(HowBuyInShop);
                     try
                     {
                         userBuy = int.Parse(Console.ReadLine()!);
@@ -455,12 +456,12 @@ public class Program
                         }
                         else
                         {
-                            Console.WriteLine($"You need more Bitcoins to buy, you have{totalBitcoins}, money needed{objectPrice}");
+                            Console.WriteLine($"You need more Bitcoins to buy, you have {totalBitcoins}, money needed{objectPrice}");
                         }
                     }
                     else
                     {
-                        Console.WriteLine("You put a wrong number");
+                        Console.WriteLine(MineError);
                     }
 
 
@@ -543,7 +544,6 @@ public class Program
                     }
                     else if (chooseScroll == 2)
                     {
-                        string scrollVowels = "aeiou";
                         string scrollString = ArrayScroll[1].ToLower();
                         int  totalVowls=0;
                         for(int i=0; i< ArrayScroll[1].Length; i++)
@@ -572,13 +572,13 @@ public class Program
                             string numberStrings = decodeScroll.Substring(i, 1); 
 
 
-                            if ("1234567890".Contains(numberStrings))
+                            if (NumberString.Contains(numberStrings))
                             {
                                 scrollNumber += numberStrings; 
                             }
                         }
 
-                        Console.WriteLine("🔮 Decoded number: " + scrollNumber);
+                        Console.WriteLine(TextNumber + scrollNumber);
 
                         trueMeaning3 = true;
                         if ((trueMeaning1 && trueMeaning2 && trueMeaning3) == true)
