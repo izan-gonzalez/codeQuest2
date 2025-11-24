@@ -28,6 +28,8 @@ public class Program
         const string MenuOptionExit = "8. Exit game";
         const string MenuPrompt = "Choose an option (1-7) - (8) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 1 and 8.";
+        const string SpaceBar = "================================================";
+        bool printName=false;
         // Level 1
         const string GuardAsk = "Guard: Whats your name Wizard?";
         const string GuardRage = "Guard: THAT NAME IS NOT ON THE LIST!, TELL ME YOUR REAL NAME!!";
@@ -43,7 +45,9 @@ public class Program
         const string WizardText3 = ", You are a Summoner of Magic Breezes.";
         const string WizardText4 = ", Wow! You can summon dragons without burning down the lab!";
         const string WizardText5 = ", You have reached the rank of Master of Arcana!.";
-        //string menuSubtitle = $"===== Welcome,{realName} the {} with level {} =====";
+        string nameWizard, upperName, firtsLetter, nameCreator, wizardMenuTitle = "", realName="";
+        int totalWizard=0, powerWizard = 0;
+
         // Level 2
         const string DiceOne = "  ________ \n /       /|\n/_______/ |\n|       | |\n|   o   | /\n|       |/\n'-------' ";
         const string DiceTwo = "  ________ \n /       /|\n/_______/ |\n|o      | |\n|       | /\n|     o |/\n'-------' ";
@@ -59,12 +63,15 @@ public class Program
         // Level 3 
         const string MineX = "Put a number between 0 to 4 to chose line to mine";
         const string MineY = "Put a number between 0 to 4 to chose column to mine";
+        const string MineError = "wrong number";
+        int mineLine=0, mineColumn=0;
         int totalBitcoins = 0;
+        
         //Level 4
         const string InventoryMassage = "In your inventory you have:";
         string[] arrayInventory = new string[0];
         //Level 5
-
+        int WizardLvl = 1;
         //Level 6
         const string AtacsLevel = "Your spells at lvl are: ";
         string[] ArrayLevel1 = { "Magic Spark 💫" };
@@ -83,21 +90,17 @@ public class Program
         string[] ArrayScroll = { "The 🐲 sleeps in the mountain of fire 🔥", "Ancient magic flows through the crystal caves", "Spell: Ignis 5 🔥, Aqua 6 💧, Terra 3 🌍, Ventus 8 🌪️" };
         int chooseScroll = 0;
 
-
+        string menuSubtitle = $"===== Welcome,{realName} the {wizardMenuTitle} with level {WizardLvl} =====";
         bool trueMeaning1 = false; 
         bool trueMeaning2 = false;
         bool trueMeaning3 = false;
-        int WizardLvl = 1;
+
 
 
 
         const string Error = "Input error try again";
-        int oP = 0, powerWizard, totalWizard = 0;
+        int oP = 0; 
 
-
-
-
-        string nameWizard;
 
 
         var random = new Random();
@@ -107,22 +110,34 @@ public class Program
 
         do
         {
-            Console.WriteLine(MenuTitle);
-            Console.WriteLine(MenuOption1);
-            Console.WriteLine(MenuOption2);
-            Console.WriteLine(MenuOption3);
-            Console.WriteLine(MenuOption4);
-            Console.WriteLine(MenuOption5);
-            Console.WriteLine(MenuOption6);
-            Console.WriteLine(MenuOption7);
-            Console.WriteLine(MenuOptionExit);
-            Console.Write(MenuPrompt);
+            if (printName==false)
+            {
+                Console.WriteLine(MenuTitle);
+                Console.WriteLine(MenuOption1);
+                Console.WriteLine(MenuOption2);
+                Console.WriteLine(MenuOption3);
+                Console.WriteLine(MenuOption4);
+                Console.WriteLine(MenuOption5);
+                Console.WriteLine(MenuOption6);
+                Console.WriteLine(MenuOption7);
+                Console.WriteLine(MenuOptionExit);
+                Console.Write(MenuPrompt);
+            }
 
-
-
-
-
-
+            if(printName) 
+            {
+                Console.WriteLine(MenuTitle);
+                Console.WriteLine(menuSubtitle);
+                Console.WriteLine(MenuOption1);
+                Console.WriteLine(MenuOption2);
+                Console.WriteLine(MenuOption3);
+                Console.WriteLine(MenuOption4);
+                Console.WriteLine(MenuOption5);
+                Console.WriteLine(MenuOption6);
+                Console.WriteLine(MenuOption7);
+                Console.WriteLine(MenuOptionExit);
+                Console.Write(MenuPrompt);
+            }
 
 
 
@@ -146,19 +161,27 @@ public class Program
             switch (oP)
             {
                 case 1:
-                    totalWizard = 0;
 
+                    nameWizard = "";
 
-
-
-                    Console.Write(GuardAsk);
+                    Console.WriteLine(GuardAsk);
                     try
                     {
                         nameWizard = Console.ReadLine()!;
 
+                         upperName = nameWizard.ToUpper();
 
 
+                         firtsLetter = upperName.Remove(1);
 
+
+                         nameCreator = nameWizard.Substring(1);
+
+
+                         realName = firtsLetter.Insert(1, nameCreator);
+
+
+                        nameWizard = realName;
                     }
                     catch (NullReferenceException)
                     {
@@ -170,28 +193,15 @@ public class Program
                     }
 
 
-                    nameWizard = Console.ReadLine()!;
-
-
-                    string upperName = nameWizard.ToUpper();
-
-
-                    string firtsLetter = upperName.Remove(1);
-
-
-                    string nameCreator = nameWizard.Substring(1);
-
-
-                    string realName = firtsLetter.Insert(1, nameCreator);
 
 
 
                     Console.WriteLine(GuardLore);
-                    Console.WriteLine("Your mind: I will meditate for that time.");
+                    Console.WriteLine($"{nameWizard}: I will meditate for that time.");
 
                     for (int i = 1; i <= 5; i++)
                     {
-                        Console.WriteLine("==============================");
+                        Console.WriteLine(SpaceBar);
 
 
 
@@ -205,31 +215,37 @@ public class Program
 
 
 
-                        Console.WriteLine($"In Day {i} Wizard has practice for {trainingTime} Hours and gained {powerWizard}, Total: {totalWizard}");
+                        Console.WriteLine($"In Day {i} Wizard has practice for {trainingTime} hours and gained {powerWizard}, Total: {totalWizard}");
 
 
 
                         if (totalWizard < 20)
                         {
                             Console.WriteLine(WizardTitle + WizardTitle1 + WizardText1);
+                            wizardMenuTitle = WizardTitle1;
 
                         }
                         else if (20 <= totalWizard && totalWizard <= 29)
                         {
                             Console.WriteLine(WizardTitle + WizardTitle2 + WizardText2);
+                            wizardMenuTitle = WizardTitle2;
                         }
                         else if (30 <= totalWizard && totalWizard <= 34)
                         {
                             Console.WriteLine(WizardTitle + WizardTitle3 + WizardText3);
+                            wizardMenuTitle = WizardTitle3;
                         }
                         else if (35 <= totalWizard && totalWizard <= 39)
                         {
                             Console.WriteLine(WizardTitle + WizardTitle4 + WizardText4);
+                            wizardMenuTitle = WizardTitle4;
                         }
                         else
                         {
                             Console.WriteLine(WizardTitle + WizardTitle5 + WizardText5);
+                            wizardMenuTitle= WizardTitle5;
                         }
+                        printName = true;
                     }
                     break;
 
@@ -292,6 +308,8 @@ public class Program
                         Console.WriteLine(LvlUp + WizardLvl);
                     }
                     break;
+
+
                 case 3:
 
                     int[,] matMine = new int[5, 5];
@@ -332,23 +350,40 @@ public class Program
 
                     while (minerTrys <= 5)
                     {
-                        Console.WriteLine(MineX);
-                        int x = int.Parse(Console.ReadLine());
-
-                        Console.WriteLine(MineY);
-                        int y = int.Parse(Console.ReadLine());
-
-                        if (matMine[x, y] == 0)
+                        try
                         {
-                            simbolMine[x, y] = "❌";
+                            Console.WriteLine(MineX);
+                             mineLine = int.Parse(Console.ReadLine());
+
+                            Console.WriteLine(MineY);
+                             mineColumn = int.Parse(Console.ReadLine());
+
+
+                        }
+                        catch(IndexOutOfRangeException)
+                        {
+                            Console.WriteLine(MineError);
+
+                        }
+                        catch(Exception)
+                        {
+                            Console.WriteLine(MineError);
+
+                        }
+ 
+
+                        if (matMine[mineLine, mineColumn] == 0)
+                        {
+                            simbolMine[mineLine, mineColumn] = "❌";
                         }
                         else
                         {
-                            simbolMine[x, y] = "🪙";
+                            simbolMine[mineLine, mineColumn] = "🪙";
+                            totalBitcoins += matMine[mineLine, mineColumn];
+                            Console.WriteLine("You obtained " + matMine[mineLine, mineColumn] + "Bitcoins");
+                            matMine[mineLine, mineColumn] -= matMine[mineLine, mineColumn];
                         }
                         minerTrys++;
-                        Console.WriteLine("You obtained " + matMine[x, y] + "Bitcoins");
-                        totalBitcoins += matMine[x, y];
                         Console.WriteLine("Your total bitcoins are" + totalBitcoins);
                         for (int i = 0; i < 5; i++)
                         {
@@ -359,8 +394,9 @@ public class Program
                             Console.WriteLine();
                         }
                     }
-                    break;
 
+
+                    break;
                 case 4:
 
 
