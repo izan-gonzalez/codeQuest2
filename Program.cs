@@ -29,6 +29,7 @@ public class Program
         const string MenuPrompt = "Choose an option (1-7) - (8) to exit: ";
         const string InputErrorMessage = "Invalid input. Please enter a number between 1 and 8.";
         const string SpaceBar = "================================================";
+        const string Error = "Input error put a number between 1 to 8";
         bool printName=false;
         // Level 1
         const string GuardAsk = "Guard: Whats your name Wizard?";
@@ -64,6 +65,8 @@ public class Program
         const string MineX = "Put a number between 0 to 4 to chose line to mine";
         const string MineY = "Put a number between 0 to 4 to chose column to mine";
         const string MineError = "wrong number";
+        const string NoBits = "❌";
+        const string YesBits = "🪙";
         int mineLine=0, mineColumn=0;
         int totalBitcoins = 0;
         
@@ -71,9 +74,10 @@ public class Program
         const string InventoryMassage = "In your inventory you have:";
         string[] arrayInventory = new string[0];
         //Level 5
+        string[] ArrayShop = { "Iron Dagger 🗡️", "Healing Potion ⚗️", "Ancient Key 🗝️", "Crossbow 🏹", "Metal Shield 🛡️" };
         int WizardLvl = 1;
         //Level 6
-        const string AtacsLevel = "Your spells at lvl are: ";
+        const string AtacsLevel = " your spells  are: ";
         string[] ArrayLevel1 = { "Magic Spark 💫" };
         string[] ArrayLevel2 = { "Fireball 🔥", "Ice Ray 🥏", "Arcane Shield ⚕️" };
         string[] ArrayLevel3 = { "Meteor ☄️", "Pure Energy Explosion 💥", "Minor Charm 🎭", "Air Strike 🍃" };
@@ -95,10 +99,6 @@ public class Program
         bool trueMeaning2 = false;
         bool trueMeaning3 = false;
 
-
-
-
-        const string Error = "Input error try again";
         int oP = 0; 
 
 
@@ -302,7 +302,7 @@ public class Program
                     }
                     while (enemyHp > 0);
 
-                    if (enemyHp <= 0)
+                    if (enemyHp <= 0 && WizardLvl<=4)
                     {
                         WizardLvl += 1;
                         Console.WriteLine(LvlUp + WizardLvl);
@@ -353,32 +353,31 @@ public class Program
                         try
                         {
                             Console.WriteLine(MineX);
-                             mineLine = int.Parse(Console.ReadLine());
+                             mineLine = int.Parse(Console.ReadLine()!);
 
                             Console.WriteLine(MineY);
-                             mineColumn = int.Parse(Console.ReadLine());
-
+                             mineColumn = int.Parse(Console.ReadLine()!);
 
                         }
                         catch(IndexOutOfRangeException)
                         {
                             Console.WriteLine(MineError);
-
+                            continue;
                         }
                         catch(Exception)
                         {
                             Console.WriteLine(MineError);
-
+                            continue;
                         }
  
 
                         if (matMine[mineLine, mineColumn] == 0)
                         {
-                            simbolMine[mineLine, mineColumn] = "❌";
+                            simbolMine[mineLine, mineColumn] = NoBits;
                         }
                         else
                         {
-                            simbolMine[mineLine, mineColumn] = "🪙";
+                            simbolMine[mineLine, mineColumn] = YesBits;
                             totalBitcoins += matMine[mineLine, mineColumn];
                             Console.WriteLine("You obtained " + matMine[mineLine, mineColumn] + "Bitcoins");
                             matMine[mineLine, mineColumn] -= matMine[mineLine, mineColumn];
@@ -424,7 +423,6 @@ public class Program
                         return newInventory;
                     }
 
-                    string[] ArrayShop = { "Iron Dagger 🗡️", "Healing Potion ⚗️", "Ancient Key 🗝️", "Crossbow 🏹", "Metal Shield 🛡️" };
 
                     int[] ArrayPrice = { 30, 10, 50, 40, 20 };
 
@@ -462,7 +460,7 @@ public class Program
                     }
                     else
                     {
-                        Console.WriteLine("You put a rong number");
+                        Console.WriteLine("You put a wrong number");
                     }
 
 
@@ -497,7 +495,7 @@ public class Program
                     }
                     else
                     {
-                        Console.WriteLine("Your spells at lvl are:");
+                        Console.WriteLine($"at level {WizardLvl}" + AtacsLevel);
                         for (int i = 0; i < ArrayLevel5.Length; i++)
                         {
                             Console.WriteLine(ArrayLevel5[i]);
