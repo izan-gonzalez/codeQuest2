@@ -453,18 +453,14 @@ public class Program
                 case 5:
                     string[] AddToInventory(string[] inventory, string item)
                     {
-                        // Crear nuevo array 1 espacio más grande
                         string[] newInventory = new string[arrayInventory.Length + 1];
 
 
-                        // Copiar todo lo anterior
                         for (int i = 0; i < inventory.Length; i++)
                         {
                             newInventory[i] = inventory[i];
                         }
 
-
-                        // Añadir el nuevo objeto
                         newInventory[newInventory.Length - 1] = item;
 
 
